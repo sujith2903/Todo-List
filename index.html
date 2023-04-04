@@ -9,6 +9,7 @@
 <body>
     <div class="side-bar">
         <div class="due">Due
+            <div class="line"></div>
             <button class="due-all">All</button>
             <button class="due-today">Today</button>
             <button class="due-this-week">This Week</button>
@@ -16,39 +17,41 @@
         </div>
 
         <div class="priority">Priority
+            <div class="line"></div>
             <button class="priority-low">Low</button>
             <button class="priority-med">Medium</button>
             <button class="priority-high">High</button>
         </div>
 
-        <div class="projects">Projects</div>
+        <div class="projects">Projects
+            <div class="line"></div>
 
-        <button class="project-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-        </svg></button>
+            <button class="project-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+            </svg></button>
 
-        <div class="projects-list"></div>
-
+            <div class="projects-list"></div>
+        </div>
     </div>
 
-    <div class="main-title">Todo List</div>
+    <div class="main-page">
 
-    <div class="main-content">
+        <div class="main-title">Todo List</div>
 
-        <div class="project-title"></div>
-        <div class="project-description"></div>
+        <div class="main-content">
 
-        <div class="tasks-header">Tasks
-            <button class="task-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                </svg></button>
+            <div class="project-title"></div>
+            <div class="project-description"></div>
+
+            <div class="tasks-header">Tasks
+                <button class="task-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                    </svg></button>
+                </div>
+
+            <div class="tasks-area">
+            </div>
         </div>
-
-        <div class="tasks-area">
-
-        </div>
-
-        
     </div>
     
 </body>
