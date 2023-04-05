@@ -69,6 +69,84 @@ svg{
     display: none;
 }
 
+.add-project{
+    display:flex;
+    width:100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding:25px;
+    border-radius: 10px;
+    gap:25px;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+form .title{
+    width:20rem;
+}
+
+form .date{
+    width: 10rem;
+}
+
+form .project-priority div{
+    flex-direction: row;
+    gap:30px;
+}
+
+form .project-priority button, form .buttons button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    width:5rem;
+}
+
+form .project-priority div button:nth-child(1){
+   background-color: #a3e635;
+   border: 1px solid #15803d;
+}
+
+form .project-priority div button:nth-child(2) {
+    background-color: #fb923c;
+    border:1px solid #9a3412;
+}
+
+form .project-priority div button:nth-child(3) {
+    background-color: #dc2626;
+    border: 1px solid #7f1d1d;
+}
+
+form .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:50px;
+}
+
+form .buttons .add{
+    background-color: #60a5fa;
+    border: 1px solid #1e40af;
+}
+
+form .buttons .cancel{
+    background-color: #64748b;
+    border: 1px solid #1e293b;
+}
+
 .line{
     border-top: 1px solid rgba(109, 25, 219, 0.8);
     height: 1px;
@@ -83,4 +161,8 @@ button{
 .task-button {
     width: 20px;
     height: auto;
+}
+
+textarea{
+    resize: none;
 }
