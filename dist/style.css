@@ -167,3 +167,25 @@ button{
 textarea{
     resize: none;
 }
+
+.project-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.project-display{
+    display: flex;
+    justify-content: center;
+    gap:10px;
+}
+
+.project-display div{
+    cursor: pointer;
+    width:5rem;
+    overflow: hidden;
+}
+
+.delete-project-button,.edit-project-button{
+    width:20px;
+    height: auto;
+}
