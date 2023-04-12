@@ -131,6 +131,10 @@ form .project-priority div button:nth-child(3) {
     border: 1px solid #7f1d1d;
 }
 
+form .project-priority div button:focus{
+    border: 3px solid black;
+}
+
 form .buttons{
     display: flex;
     flex-direction: row;
@@ -168,7 +172,7 @@ textarea{
     resize: none;
 }
 
-.project-list{
+.project-lists{
     display: flex;
     flex-direction: column;
 }
