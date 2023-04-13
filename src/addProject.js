@@ -23,7 +23,7 @@ const addProjectList = (function () {
                 event.preventDefault()
                 const newProject = createProject(title.value, description.value, date.value,priorityValue)
                 myProjectArray.push(newProject)
-                dom.createProject()
+                dom.createProjectDiv()
                 console.log(myProjectArray)
                 addProject.style.display = 'none'
                 form.reset()

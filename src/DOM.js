@@ -3,9 +3,11 @@ import addProjectList from './addProject'
 const dom = (function () {
     
     let index
+    let openProject
     const projectsList = document.querySelector('.projects-lists')
+    const mainContent = document.querySelector('.main-content')
 
-    const createProject = function () {
+    const createProjectDiv = function () {
 
         const deleteProjectButton = document.createElement('button')
         const editProjectButton = document.createElement('button')
@@ -29,10 +31,12 @@ const dom = (function () {
     }
 
     const deleteProject = function (index) {
-        
-        console.log(index)
+
+        if (addProjectList.myProjectArray[index] === openProject) {
+            mainContent.style.display='none'
+        }
+
         addProjectList.myProjectArray.splice(index , 1)
-        
     }
 
     projectsList.addEventListener('click', (project) => {
@@ -41,10 +45,7 @@ const dom = (function () {
             (project.target.classList.contains('editSVG'))) {
         
             let targetProject = project.target.closest('.project-display')
-            console.log(targetProject)
             index = Array.from(targetProject.parentNode.children).indexOf(targetProject)
-            
-            console.log(index)
         }
     })
 
@@ -53,16 +54,20 @@ const dom = (function () {
             const projectDiv = project.target.closest('.project-display')
             deleteProject(index)
             projectsList.removeChild(projectDiv)
+            
             console.log(addProjectList.myProjectArray)
         }
     })
 
-    /*
-
-    createProject.deleteProjectButton.addEventListener('click',deleteProject)
-                deleteProjectButton.addEventListener('click', () => {
-                projectsList.removeChild(projectDiv)
+    projectsList.addEventListener('click', (project) => {
+        if (project.target.classList.contains('project')) {
+            
+            mainContent.style.display = 'flex'
+            openProject = addProjectList.myProjectArray[index]
+        }
     })
+
+    /*
 
     editProjectButton.addEventListener('click', () => {
         addProjectList.addProject.style.display = 'flex'
@@ -72,7 +77,7 @@ const dom = (function () {
     
 
     return {
-        createProject,
+        createProjectDiv,
         deleteProject
     }
 
