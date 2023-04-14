@@ -6,6 +6,11 @@ const dom = (function () {
     let openProject
     const projectsList = document.querySelector('.projects-lists')
     const mainContent = document.querySelector('.main-content')
+    const projectTitle = document.querySelector('.project-title')
+    const projectDescription = document.querySelector('.project-description')
+    const projectDue = document.querySelector('.project-due')
+    const projectPriority = document.querySelector('.priority')
+    const tasksArea = document.querySelector('.tasks-area')
 
     const createProjectDiv = function () {
 
@@ -64,6 +69,12 @@ const dom = (function () {
             
             mainContent.style.display = 'flex'
             openProject = addProjectList.myProjectArray[index]
+
+            projectTitle.textContent = openProject['title']
+            projectDescription.textContent  = openProject['description']
+            projectDue.textContent  = openProject['date']
+            projectPriority.textContent  = openProject['priority']
+
         }
     })
 

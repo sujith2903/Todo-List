@@ -16,7 +16,7 @@
             <button class="completed">Completed</button>
         </div>
 
-        <div class="priority">Priority
+        <div class="priority-tab">Priority
             <div class="line"></div>
             <button class="priority-low">Low</button>
             <button class="priority-med">Medium</button>
@@ -40,23 +40,34 @@
 
         <div class="main-content">
 
-            <div class="project-title"></div>
+            <div class="title-and-due">
+                <div class="project-title"></div>
+                <div class="priority"></div>
+                <div class="project-due"></div>
+            </div>
             <div class="project-description"></div>
 
-            <div class="tasks-header">Tasks
-                <button class="task-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                    </svg></button>
+            <form class="task-form" action="" method="post">
+                <div class="task-checkbox">
+                    <label for="task1-checkbox"></label>
+                    <input type="checkbox" class = "task-checkbox" id="task1-checkbox" name="checkbox">
                 </div>
 
-            <div class="tasks-area">
-            </div>
+                <div class="task-input">
+                    <label for="task1-input"></label>
+                    <input type="text" class="task-input" id="task1-input" name="task" required>
+                </div>
+
+                <button class="task-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>
+                </button>
+            </form>
         </div>
     </div>
 
     
     <div class="add-project">
-        <form action="" method="post">
+        <form class= "add-project-form" action="" method="post">
             <div class="title">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="project-title" required>

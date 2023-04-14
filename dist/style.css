@@ -7,8 +7,10 @@
 
 body{
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1.5fr 5fr;
     height: 100vh;
+    
+
 }
 
 .side-bar{
@@ -18,7 +20,8 @@ body{
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 5rem;
-    background-image: linear-gradient(125deg, rgb(255, 208, 0) 15%, rgb(0, 255, 13));
+    background-image: linear-gradient(125deg, rgb(255, 208, 0,0.5) 15%, rgb(0, 255, 13,0.5));
+    border-right: 5px solid rgb(0, 0, 0);
 }
 
 .due{
@@ -26,7 +29,7 @@ body{
     flex-direction: column;
 }
 
-.priority{
+.priority-tab{
     display: flex;
     flex-direction: column;
 }
@@ -53,7 +56,8 @@ svg{
 .main-page{
     display: grid;
     grid-row: 1/3;
-    grid-template-rows: 1fr 100%;
+    grid-template-rows: 1fr 80%;
+    background-color: rgba(255, 255, 0, 0.5);
 }
 
 .main-title{
@@ -61,12 +65,73 @@ svg{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #6ee7b7;
+    background-color: rgb(255, 174, 24,0.7);
     font-size: 5rem;
+    border-bottom: 5px solid rgb(0, 0, 0);
 }
 
 .main-content{
     display: none;
+    flex-direction: column;
+    gap:10px;
+    padding: 2rem;
+    margin: 1rem;
+    
+}
+
+.title-and-due{
+    display: flex;
+    align-items: center;
+}
+
+.project-title{
+    font-size: 3rem;
+    
+}
+
+.priority {
+    padding-left: 10px;
+    font-size: 0.95rem;
+    align-self: center;
+}
+
+.project-due{
+   margin-left: auto;
+}
+
+.project-description{
+    border: 1px solid black;
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: none;
+    padding: 5px;
+    margin-bottom: 0px;
+}
+
+.task-form{
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    justify-items: center;
+    align-items: center;
+    border-radius: 0px 0px 5px 5px;
+    border: 1px solid black;
+    padding: 25px 5px;
+    margin-top: -10px;
+}
+
+.task-checkbox{
+    width:2rem;
+    height: 2rem;
+}
+
+.task-input{
+    width: 100%;
+    height: 2rem;
+}
+
+.task-button {
+    height:2rem;
+    width: 2rem;
+    display: flex;
 }
 
 .add-project{
@@ -82,7 +147,7 @@ svg{
 }
 
 
-form{
+.add-project-form{
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -91,69 +156,69 @@ form{
     gap:25px;
 }
 
-form div{
+.add-project-form div{
     display: flex;
     flex-direction: column;
     gap:10px;
 }
 
-form .title{
+.add-project-form .title{
     width:20rem;
 }
 
-form .date{
+.add-project-form .date{
     width: 10rem;
 }
 
-form .project-priority div{
+.add-project-form .project-priority div{
     flex-direction: row;
     gap:30px;
 }
 
-form .project-priority button, form .buttons button{
+.add-project-form .project-priority button, form .buttons button{
     padding: 5px 10px;
     border-radius: 5px;
     width:5rem;
 }
 
-form .project-priority div button:nth-child(1){
+.add-project-form .project-priority div button:nth-child(1){
    background-color: #a3e635;
    border: 1px solid #15803d;
 }
 
-form .project-priority div button:nth-child(2) {
+.add-project-form .project-priority div button:nth-child(2) {
     background-color: #fb923c;
     border:1px solid #9a3412;
 }
 
-form .project-priority div button:nth-child(3) {
+.add-project-form .project-priority div button:nth-child(3) {
     background-color: #dc2626;
     border: 1px solid #7f1d1d;
 }
 
-form .project-priority div button:focus{
+.add-project-form .project-priority div button:focus{
     border: 3px solid black;
 }
 
-form .buttons{
+.add-project-form .buttons{
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap:50px;
 }
 
-form .buttons .add{
+.add-project-form .buttons .add{
     background-color: #60a5fa;
     border: 1px solid #1e40af;
 }
 
-form .buttons .cancel{
+.add-project-form .buttons .cancel{
     background-color: #64748b;
     border: 1px solid #1e293b;
 }
 
 .line{
-    border-top: 1px solid rgba(109, 25, 219, 0.8);
+    border-top: 1px solid rgba(184, 248, 7, 0.8);
     height: 1px;
 }
 
@@ -161,11 +226,6 @@ button{
     border: none;
     background-color: transparent;
     cursor: pointer;
-}
-
-.task-button {
-    width: 20px;
-    height: auto;
 }
 
 textarea{
