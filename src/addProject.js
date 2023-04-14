@@ -3,7 +3,7 @@ import dom from './DOM'
 const addProjectList = (function () {
 
     const addProject = document.querySelector('.add-project')
-    const form = document.querySelector('form')
+    const form = document.querySelector('.add-project-form')
     const title = document.querySelector('#title')
     const description = document.querySelector('#description')
     const date = document.querySelector('#date')
