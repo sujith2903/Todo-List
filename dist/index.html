@@ -48,17 +48,20 @@
             <div class="project-description"></div>
 
             <form class="task-form" action="" method="post">
-                <div class="task-checkbox">
-                    <label for="task1-checkbox"></label>
-                    <input type="checkbox" class = "task-checkbox" id="task1-checkbox" name="checkbox">
+                <div class="all-tasks">
+                    <div class="individual-task">
+                        <div class="task-checkbox">
+                            <label for="task1-checkbox"></label>
+                            <input type="checkbox" class = "task-checkbox" id="task1-checkbox" name="checkbox">
+                        </div>
+                        <div class="task-input">
+                            <label for="task1-input"></label>
+                            <input type="text" class="task-input" id="task1-input" name="task" required>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="task-input">
-                    <label for="task1-input"></label>
-                    <input type="text" class="task-input" id="task1-input" name="task" required>
-                </div>
-
-                <button class="task-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <button class="task-button" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>
                 </button>
             </form>

@@ -109,8 +109,7 @@ svg{
 
 .task-form{
     display: grid;
-    grid-template-columns: 1fr 8fr 1fr;
-    justify-items: center;
+    grid-template-columns: 9fr 1fr;
     align-items: center;
     border-radius: 0px 0px 5px 5px;
     border: 1px solid black;
@@ -118,20 +117,40 @@ svg{
     margin-top: -10px;
 }
 
+.all-tasks{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.individual-task{
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    align-items: center;
+}
+
 .task-checkbox{
     width:2rem;
     height: 2rem;
+    justify-self: center;
 }
 
 .task-input{
     width: 100%;
     height: 2rem;
+    background-color: transparent;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.task-delete-button{
+    margin-left: 1rem;
 }
 
 .task-button {
     height:2rem;
     width: 2rem;
     display: flex;
+    justify-self: center;
 }
 
 .add-project{
@@ -249,7 +268,7 @@ textarea{
     overflow: hidden;
 }
 
-.delete-project-button,.edit-project-button{
+.delete-project-button,.edit-project-button,.task-delete-button{
     width:20px;
     height: auto;
 }

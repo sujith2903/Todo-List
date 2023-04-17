@@ -10,7 +10,8 @@ const dom = (function () {
     const projectDescription = document.querySelector('.project-description')
     const projectDue = document.querySelector('.project-due')
     const projectPriority = document.querySelector('.priority')
-    const tasksArea = document.querySelector('.tasks-area')
+    const taskButton = document.querySelector('.task-button')
+    const allTasks = document.querySelector('.all-tasks')
 
     const createProjectDiv = function () {
 
@@ -77,6 +78,33 @@ const dom = (function () {
 
         }
     })
+
+    taskButton.addEventListener('click', () => {
+        const newTask = document.createElement('div')
+        newTask.classList.add('individual-task')
+        allTasks.appendChild(newTask)
+
+        const newCheckbox = document.createElement('div')
+        newCheckbox.classList.add('task-checkbox')
+        newTask.appendChild(newCheckbox)
+        newCheckbox.innerHTML = '<label for="task1-checkbox"></label><input type="checkbox" class = "task-checkbox" id="task1-checkbox" name="checkbox">'
+        
+        const newInput = document.createElement('div')
+        newInput.classList.add('task-input')
+        newTask.appendChild(newInput)
+        newInput.innerHTML = '<label for="task1-input"></label><input type="text" class="task-input" id="task1-input" name="task" required>'
+        
+        const taskDeleteButton = document.createElement('div')
+        taskDeleteButton.classList.add('task-delete-button')
+        newTask.appendChild(taskDeleteButton)
+        taskDeleteButton.innerHTML = '<svg class="deleteSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="deleteSVG" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>'
+    
+        taskDeleteButton.addEventListener('click', () => {
+            allTasks.removeChild(newTask)
+        })
+    
+    })
+
 
     /*
 
