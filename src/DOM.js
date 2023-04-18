@@ -3,6 +3,7 @@ import addProjectList from './addProject'
 const dom = (function () {
     
     let index
+    let taskIndex
     let openProject
     const projectsList = document.querySelector('.projects-lists')
     const mainContent = document.querySelector('.main-content')
@@ -12,6 +13,7 @@ const dom = (function () {
     const projectPriority = document.querySelector('.priority')
     const taskButton = document.querySelector('.task-button')
     const allTasks = document.querySelector('.all-tasks')
+    const individualTask = document.querySelector('.individual-task')
 
     const createProjectDiv = function () {
 
@@ -61,7 +63,6 @@ const dom = (function () {
             deleteProject(index)
             projectsList.removeChild(projectDiv)
             
-            console.log(addProjectList.myProjectArray)
         }
     })
 
@@ -79,18 +80,19 @@ const dom = (function () {
         }
     })
 
-    taskButton.addEventListener('click', () => {
+    const generateNewTask = function () {
+
         const newTask = document.createElement('div')
         newTask.classList.add('individual-task')
         allTasks.appendChild(newTask)
 
         const newCheckbox = document.createElement('div')
-        newCheckbox.classList.add('task-checkbox')
+        newCheckbox.classList.add('task-checkbox-div')
         newTask.appendChild(newCheckbox)
         newCheckbox.innerHTML = '<label for="task1-checkbox"></label><input type="checkbox" class = "task-checkbox" id="task1-checkbox" name="checkbox">'
         
         const newInput = document.createElement('div')
-        newInput.classList.add('task-input')
+        newInput.classList.add('task-input-div')
         newTask.appendChild(newInput)
         newInput.innerHTML = '<label for="task1-input"></label><input type="text" class="task-input" id="task1-input" name="task" required>'
         
@@ -98,16 +100,38 @@ const dom = (function () {
         taskDeleteButton.classList.add('task-delete-button')
         newTask.appendChild(taskDeleteButton)
         taskDeleteButton.innerHTML = '<svg class="deleteSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="deleteSVG" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>'
-    
+        
         taskDeleteButton.addEventListener('click', () => {
             allTasks.removeChild(newTask)
-        })
-    
+        })  
+    }
+
+    allTasks.addEventListener('click', (event) => {
+        if ((event.target.classList.contains('task-checkbox')) ||
+            (event.target.classList.contains('task-input')) ||
+            (event.target.classList.contains('deleteSVG'))) {
+            
+            let targetTask = event.target.closest('.individual-task')
+            taskIndex = Array.from(targetTask.parentNode.children).indexOf(targetTask)
+            console.log(taskIndex)
+        }
     })
 
+    taskButton.addEventListener('click', () => {
+    
+        generateNewTask()
+        const taskInput = document.querySelectorAll('.task-input')
+       
+        taskInput.forEach((task) => {
+            task.addEventListener('change', () => {
+                addProjectList.myProjectArray[index]['tasks'][taskIndex] = task.value
+
+                console.log(addProjectList.myProjectArray)
+            }) 
+        })
+    })
 
     /*
-
     editProjectButton.addEventListener('click', () => {
         addProjectList.addProject.style.display = 'flex'
 
