@@ -5,6 +5,7 @@ const dom = (function () {
     let index
     let taskIndex
     let openProject
+    let previousProject
     const projectsList = document.querySelector('.projects-lists')
     const mainContent = document.querySelector('.main-content')
     const projectTitle = document.querySelector('.project-title')
@@ -13,7 +14,6 @@ const dom = (function () {
     const projectPriority = document.querySelector('.priority')
     const taskButton = document.querySelector('.task-button')
     const allTasks = document.querySelector('.all-tasks')
-    const individualTask = document.querySelector('.individual-task')
 
     const createProjectDiv = function () {
 
@@ -47,39 +47,6 @@ const dom = (function () {
         addProjectList.myProjectArray.splice(index , 1)
     }
 
-    projectsList.addEventListener('click', (project) => {
-        if ((project.target.classList.contains('project')) ||
-            (project.target.classList.contains('deleteSVG')) ||
-            (project.target.classList.contains('editSVG'))) {
-        
-            let targetProject = project.target.closest('.project-display')
-            index = Array.from(targetProject.parentNode.children).indexOf(targetProject)
-        }
-    })
-
-    projectsList.addEventListener('click', (project) => {
-        if (project.target.classList.contains('deleteSVG')) {
-            const projectDiv = project.target.closest('.project-display')
-            deleteProject(index)
-            projectsList.removeChild(projectDiv)
-            
-        }
-    })
-
-    projectsList.addEventListener('click', (project) => {
-        if (project.target.classList.contains('project')) {
-            
-            mainContent.style.display = 'flex'
-            openProject = addProjectList.myProjectArray[index]
-
-            projectTitle.textContent = openProject['title']
-            projectDescription.textContent  = openProject['description']
-            projectDue.textContent  = openProject['date']
-            projectPriority.textContent  = openProject['priority']
-
-        }
-    })
-
     const generateNewTask = function () {
 
         const newTask = document.createElement('div')
@@ -100,11 +67,64 @@ const dom = (function () {
         taskDeleteButton.classList.add('task-delete-button')
         newTask.appendChild(taskDeleteButton)
         taskDeleteButton.innerHTML = '<svg class="deleteSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="deleteSVG" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>'
-        
-        taskDeleteButton.addEventListener('click', () => {
-            allTasks.removeChild(newTask)
-        })  
+         
     }
+
+    const generateTaskList = function () {
+        for (let i = 0; i < openProject['tasks'].length; i++){
+            generateNewTask()
+
+            const taskInput = document.querySelectorAll('.task-input')
+            taskInput[i].value = openProject['tasks'][i]
+        }
+    }
+
+    const clearTaskList = function () {
+
+        const individualTask = document.querySelectorAll('.individual-task')
+       
+        individualTask.forEach((task) => {
+            allTasks.removeChild(task)
+        })
+    }
+
+    projectsList.addEventListener('click', (project) => {
+        if ((project.target.classList.contains('project')) ||
+            (project.target.classList.contains('deleteSVG')) ||
+            (project.target.classList.contains('editSVG'))) {
+        
+            let targetProject = project.target.closest('.project-display')
+            index = Array.from(targetProject.parentNode.children).indexOf(targetProject)
+        }
+    })
+
+    // Event handler when a project is deleted
+    projectsList.addEventListener('click', (project) => {
+        if (project.target.classList.contains('deleteSVG')) {
+            const projectDiv = project.target.closest('.project-display')
+            deleteProject(index)
+            projectsList.removeChild(projectDiv)
+            
+        }
+    })
+
+    // Event handler when a project is clicked
+    projectsList.addEventListener('click', (project) => {
+        if (project.target.classList.contains('project')) {
+            
+            mainContent.style.display = 'flex'
+            previousProject = openProject
+            openProject = addProjectList.myProjectArray[index]
+
+            projectTitle.textContent = openProject['title']
+            projectDescription.textContent  = openProject['description']
+            projectDue.textContent  = openProject['date']
+            projectPriority.textContent = openProject['priority']
+            
+            clearTaskList()
+            generateTaskList()
+        }
+    })
 
     allTasks.addEventListener('click', (event) => {
         if ((event.target.classList.contains('task-checkbox')) ||
@@ -112,11 +132,12 @@ const dom = (function () {
             (event.target.classList.contains('deleteSVG'))) {
             
             let targetTask = event.target.closest('.individual-task')
+            console.log(targetTask)
             taskIndex = Array.from(targetTask.parentNode.children).indexOf(targetTask)
-            console.log(taskIndex)
         }
     })
 
+    // Event handler for new task creation
     taskButton.addEventListener('click', () => {
     
         generateNewTask()
@@ -125,11 +146,19 @@ const dom = (function () {
         taskInput.forEach((task) => {
             task.addEventListener('change', () => {
                 addProjectList.myProjectArray[index]['tasks'][taskIndex] = task.value
-
-                console.log(addProjectList.myProjectArray)
             }) 
         })
     })
+
+    // Event handler for deleting a task
+    allTasks.addEventListener('click', (event) => {
+        if (event.target.classList.contains('deleteSVG')) {
+
+            const currentTask = event.target.closest('.individual-task')
+            addProjectList.myProjectArray[index]['tasks'].splice(taskIndex,1)
+            allTasks.removeChild(currentTask)
+        }
+    }) 
 
     /*
     editProjectButton.addEventListener('click', () => {
