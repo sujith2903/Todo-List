@@ -1,3 +1,4 @@
+import { is } from 'date-fns/locale';
 import addProjectList from './addProject'
 
 const dom = (function () {
@@ -5,7 +6,6 @@ const dom = (function () {
     let index
     let taskIndex
     let openProject
-    let previousProject
     const projectsList = document.querySelector('.projects-lists')
     const mainContent = document.querySelector('.main-content')
     const projectTitle = document.querySelector('.project-title')
@@ -70,12 +70,24 @@ const dom = (function () {
          
     }
 
+    const generateTaskObject = function (taskName, isCompleted) {
+
+        if (isCompleted == undefined) {
+            isCompleted = false
+        }
+       
+        return {taskName, isCompleted}
+    }
+
     const generateTaskList = function () {
         for (let i = 0; i < openProject['tasks'].length; i++){
             generateNewTask()
 
             const taskInput = document.querySelectorAll('.task-input')
-            taskInput[i].value = openProject['tasks'][i]
+            const checkBox  = document.querySelectorAll('.task-checkbox')
+            taskInput[i].value = openProject['tasks'][i]['taskName']
+            checkBox[i].checked = openProject['tasks'][i]['isCompleted']
+
         }
     }
 
@@ -113,7 +125,6 @@ const dom = (function () {
         if (project.target.classList.contains('project')) {
             
             mainContent.style.display = 'flex'
-            previousProject = openProject
             openProject = addProjectList.myProjectArray[index]
 
             projectTitle.textContent = openProject['title']
@@ -132,7 +143,7 @@ const dom = (function () {
             (event.target.classList.contains('deleteSVG'))) {
             
             let targetTask = event.target.closest('.individual-task')
-            console.log(targetTask)
+            
             taskIndex = Array.from(targetTask.parentNode.children).indexOf(targetTask)
         }
     })
@@ -142,11 +153,27 @@ const dom = (function () {
     
         generateNewTask()
         const taskInput = document.querySelectorAll('.task-input')
+        let taskName
+        let isCompleted 
        
         taskInput.forEach((task) => {
+
+            const taskCheckBoxDiv = task.closest('.individual-task')
+            const taskCheckBox = taskCheckBoxDiv.querySelector('.task-checkbox')
+
             task.addEventListener('change', () => {
-                addProjectList.myProjectArray[index]['tasks'][taskIndex] = task.value
+
+                taskName = task.value
+                const taskObject = generateTaskObject(taskName, isCompleted)
+                addProjectList.myProjectArray[index]['tasks'][taskIndex] = taskObject
             }) 
+
+            taskCheckBox.addEventListener('change', () => {
+
+                isCompleted = taskCheckBox.checked
+                const taskObject = generateTaskObject(taskName, isCompleted)
+                addProjectList.myProjectArray[index]['tasks'][taskIndex] = taskObject
+            })
         })
     })
 
