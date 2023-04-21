@@ -127,6 +127,8 @@ const dom = (function () {
             mainContent.style.display = 'flex'
             openProject = addProjectList.myProjectArray[index]
 
+            console.log(openProject)
+
             projectTitle.textContent = openProject['title']
             projectDescription.textContent  = openProject['description']
             projectDue.textContent  = openProject['date']
@@ -192,8 +194,6 @@ const dom = (function () {
         addProjectList.addProject.style.display = 'flex'
 
     })*/
-
-    
 
     return {
         createProjectDiv,

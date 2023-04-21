@@ -12,7 +12,7 @@ const addProjectList = (function () {
     const cancelButton = document.querySelector('.cancel')
 
     let myProjectArray = []
-    let priorityValue = ''
+    let priorityValue = 'Low'
    
     const displayForm = function () {
         
@@ -21,11 +21,12 @@ const addProjectList = (function () {
         addButton.addEventListener('click', (event) => {
             if (title.value != '') {
                 event.preventDefault()
-                const newProject = createProject(title.value, description.value, date.value,priorityValue)
+                const newProject = createProject(title.value, description.value, date.value, priorityValue)
                 myProjectArray.push(newProject)
                 dom.createProjectDiv()
                 console.log(myProjectArray)
                 addProject.style.display = 'none'
+                priorityValue = 'Low'
                 form.reset()
             }
         })
