@@ -154,28 +154,25 @@ const dom = (function () {
     taskButton.addEventListener('click', () => {
     
         generateNewTask()
-        const taskInput = document.querySelectorAll('.task-input')
+    
         let taskName
         let isCompleted 
        
-        taskInput.forEach((task) => {
+        allTasks.addEventListener('change', (event) => {
 
-            const taskCheckBoxDiv = task.closest('.individual-task')
-            const taskCheckBox = taskCheckBoxDiv.querySelector('.task-checkbox')
+            if (event.target.classList.contains('task-checkbox')) {
 
-            task.addEventListener('change', () => {
-
-                taskName = task.value
+                isCompleted = event.target.checked
                 const taskObject = generateTaskObject(taskName, isCompleted)
                 addProjectList.myProjectArray[index]['tasks'][taskIndex] = taskObject
-            }) 
 
-            taskCheckBox.addEventListener('change', () => {
+            } else if (event.target.classList.contains('task-input')) {
 
-                isCompleted = taskCheckBox.checked
+                taskName = event.target.value
                 const taskObject = generateTaskObject(taskName, isCompleted)
                 addProjectList.myProjectArray[index]['tasks'][taskIndex] = taskObject
-            })
+
+            }
         })
     })
 
