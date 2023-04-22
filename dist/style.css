@@ -158,6 +158,11 @@ svg{
     justify-self: center;
 }
 
+.due-content{
+    display: none;
+    flex-direction: column;
+}
+
 .add-project{
     display:none;
     justify-content: center;

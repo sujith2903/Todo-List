@@ -1,4 +1,4 @@
-import { is } from 'date-fns/locale';
+import { isThisWeek, isToday } from 'date-fns';
 import addProjectList from './addProject'
 
 const dom = (function () {
@@ -8,12 +8,15 @@ const dom = (function () {
     let openProject
     const projectsList = document.querySelector('.projects-lists')
     const mainContent = document.querySelector('.main-content')
+    const dueContent = document.querySelector('.due-content')
     const projectTitle = document.querySelector('.project-title')
     const projectDescription = document.querySelector('.project-description')
     const projectDue = document.querySelector('.project-due')
     const projectPriority = document.querySelector('.priority')
     const taskButton = document.querySelector('.task-button')
     const allTasks = document.querySelector('.all-tasks')
+    const dueToday = document.querySelector('.due-today')
+    const dueThisWeek = document.querySelector('.due-this-week')
 
     const createProjectDiv = function () {
 
@@ -125,6 +128,7 @@ const dom = (function () {
         if (project.target.classList.contains('project')) {
             
             mainContent.style.display = 'flex'
+            dueContent.style.display = 'none'
             openProject = addProjectList.myProjectArray[index]
 
             console.log(openProject)
@@ -185,6 +189,28 @@ const dom = (function () {
             allTasks.removeChild(currentTask)
         }
     }) 
+
+    // Event handler for sorting by due date
+    dueToday.addEventListener('click', () => {
+
+        const title = document.querySelector('.due-title')
+        let dueTodayProjects = []
+
+        mainContent.style.display = 'none'
+        dueContent.style.display = 'flex'
+
+        title.textContent = 'Due Today'
+
+        for (let i = 0; i < addProjectList.myProjectArray.length; i++){
+
+            let date = new Date(`${addProjectList.myProjectArray[i]['date']}` + `CDT`)
+
+            if (isToday(new Date(date))) {
+                console.log('test')
+                dueTodayProjects.push(addProjectList.myProjectArray[i])
+            }
+        }
+    })
 
     /*
     editProjectButton.addEventListener('click', () => {
