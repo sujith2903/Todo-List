@@ -76,7 +76,6 @@ svg{
     gap:10px;
     padding: 2rem;
     margin: 1rem;
-    
 }
 
 .title-and-due{
@@ -86,7 +85,6 @@ svg{
 
 .project-title{
     font-size: 3rem;
-    
 }
 
 .priority {
@@ -161,6 +159,18 @@ svg{
 .due-content{
     display: none;
     flex-direction: column;
+    gap: 10px;
+    padding: 2rem;
+    margin: 1rem;
+    align-items: center;
+}
+
+.due-title{
+    font-size: 2rem;
+}
+
+.due-project{
+    font-size: 1.75rem;
 }
 
 .add-project{
