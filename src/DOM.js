@@ -17,6 +17,9 @@ const dom = (function () {
     const allTasks = document.querySelector('.all-tasks')
     const dueToday = document.querySelector('.due-today')
     const dueThisWeek = document.querySelector('.due-this-week')
+    const dueTitle = document.querySelector('.due-title')
+    const dueProjectList = document.querySelector('.due-projects-lists')
+
 
     const createProjectDiv = function () {
 
@@ -101,6 +104,46 @@ const dom = (function () {
         individualTask.forEach((task) => {
             allTasks.removeChild(task)
         })
+    }
+
+    const generateDueProjects = function (dueType) {
+        
+        
+        mainContent.style.display = 'none'
+        dueContent.style.display = 'flex'
+       
+        while (dueProjectList.hasChildNodes()){
+            dueProjectList.removeChild(dueProjectList.firstChild)
+        }
+
+        for (let i = 0; i < addProjectList.myProjectArray.length; i++){
+
+            let date = new Date(`${addProjectList.myProjectArray[i]['date']}` + `CDT`)
+
+            if (dueType == 'isToday') {
+
+                dueTitle.textContent = 'Due Today'
+
+                if (isToday(new Date(date))) {
+
+                    const dueProjectDiv = document.createElement('div')
+                    dueProjectDiv.classList.add('due-project')
+                    dueProjectList.appendChild(dueProjectDiv)
+                    dueProjectDiv.textContent = addProjectList.myProjectArray[i]['title']
+                }
+            } else if (dueType == 'isThisWeek') {
+                
+                dueTitle.textContent = 'Due This Week'
+
+                if (isThisWeek(new Date(date))) {
+
+                    const dueProjectDiv = document.createElement('div')
+                    dueProjectDiv.classList.add('due-project')
+                    dueProjectList.appendChild(dueProjectDiv)
+                    dueProjectDiv.textContent = addProjectList.myProjectArray[i]['title']
+                }
+            }  
+        }
     }
 
     projectsList.addEventListener('click', (project) => {
@@ -192,46 +235,12 @@ const dom = (function () {
 
     // Event handler for sorting by due date
     dueToday.addEventListener('click', () => {
-
-        const title = document.querySelector('.due-title')
-        let dueProjects = []
-
-        mainContent.style.display = 'none'
-        dueContent.style.display = 'flex'
-
-        title.textContent = 'Due Today'
-
-        for (let i = 0; i < addProjectList.myProjectArray.length; i++){
-
-            let date = new Date(`${addProjectList.myProjectArray[i]['date']}` + `CDT`)
-
-            if (isToday(new Date(date))) {
-                dueProjects.push(addProjectList.myProjectArray[i])
-            }
-        }
-        console.log(dueProjects)
+        generateDueProjects('isToday')
     })
 
     // Event handler for sorting by due date
     dueThisWeek.addEventListener('click', () => {
-
-        const title = document.querySelector('.due-title')
-        let dueProjects = []
-
-        mainContent.style.display = 'none'
-        dueContent.style.display = 'flex'
-
-        title.textContent = 'Due Today'
-
-        for (let i = 0; i < addProjectList.myProjectArray.length; i++){
-
-            let date = new Date(`${addProjectList.myProjectArray[i]['date']}` + `CDT`)
-
-            if (isThisWeek(new Date(date))) {
-                dueProjects.push(addProjectList.myProjectArray[i])
-            }
-        }
-        console.log(dueProjects)
+         generateDueProjects('isThisWeek')       
     })
 
 
