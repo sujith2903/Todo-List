@@ -19,7 +19,7 @@ const dom = (function () {
     const dueThisWeek = document.querySelector('.due-this-week')
     const dueTitle = document.querySelector('.due-title')
     const dueProjectList = document.querySelector('.due-projects-lists')
-
+    const priorityTab = document.querySelector('.priority-tab')
 
     const createProjectDiv = function () {
 
@@ -108,7 +108,6 @@ const dom = (function () {
 
     const generateDueProjects = function (dueType) {
         
-        
         mainContent.style.display = 'none'
         dueContent.style.display = 'flex'
        
@@ -146,6 +145,56 @@ const dom = (function () {
         }
     }
 
+    const generatePriorityProjects = function (priority) {
+
+        mainContent.style.display = 'none'
+        dueContent.style.display = 'flex'
+       
+        while (dueProjectList.hasChildNodes()) {
+            dueProjectList.removeChild(dueProjectList.firstChild)
+        }
+
+        if (priority == 'low') {
+
+            dueTitle.textContent = 'Low Priority Projects'
+
+            for (let i = 0; i < addProjectList.myProjectArray.length; i++) {
+                
+                if (addProjectList.myProjectArray[i]['priority'] == 'Low') {
+                    const dueProjectDiv = document.createElement('div')
+                    dueProjectDiv.classList.add('due-project')
+                    dueProjectList.appendChild(dueProjectDiv)
+                    dueProjectDiv.textContent = addProjectList.myProjectArray[i]['title']
+                }
+            }
+        } else if (priority == 'med') {
+            
+            dueTitle.textContent = 'Medium Priority Projects'
+
+            for (let i = 0; i < addProjectList.myProjectArray.length; i++) {
+                
+                if (addProjectList.myProjectArray[i]['priority'] == 'Medium') {
+                    const dueProjectDiv = document.createElement('div')
+                    dueProjectDiv.classList.add('due-project')
+                    dueProjectList.appendChild(dueProjectDiv)
+                    dueProjectDiv.textContent = addProjectList.myProjectArray[i]['title']
+                }
+            }
+        } else if (priority == 'high') {
+            dueTitle.textContent = 'High Priority Projects'
+
+            for (let i = 0; i < addProjectList.myProjectArray.length; i++) {
+                
+                if (addProjectList.myProjectArray[i]['priority'] == 'High') {
+                    const dueProjectDiv = document.createElement('div')
+                    dueProjectDiv.classList.add('due-project')
+                    dueProjectList.appendChild(dueProjectDiv)
+                    dueProjectDiv.textContent = addProjectList.myProjectArray[i]['title']
+                }
+            }
+        }
+    }
+    
     projectsList.addEventListener('click', (project) => {
         if ((project.target.classList.contains('project')) ||
             (project.target.classList.contains('deleteSVG')) ||
@@ -218,7 +267,6 @@ const dom = (function () {
                 taskName = event.target.value
                 const taskObject = generateTaskObject(taskName, isCompleted)
                 addProjectList.myProjectArray[index]['tasks'][taskIndex] = taskObject
-
             }
         })
     })
@@ -243,6 +291,15 @@ const dom = (function () {
          generateDueProjects('isThisWeek')       
     })
 
+    priorityTab.addEventListener('click', (event) => {
+        if (event.target.classList.contains('priority-low')) {
+            generatePriorityProjects('low')
+        } else if (event.target.classList.contains('priority-med')) {
+            generatePriorityProjects('med')
+        } else if (event.target.classList.contains('priority-high')) {
+            generatePriorityProjects('high')
+        }
+    })
 
     /*
     editProjectButton.addEventListener('click', () => {
