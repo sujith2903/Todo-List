@@ -97,6 +97,39 @@
             </div>
         </form>
     </div>
+
+    <div class="edit-project">
+        <form class="edit-project-form" action="" method="post">
+            <div class="title">
+                <label for="edit-title">Title</label>
+                <input type="text" id="edit-title" name="project-title" required>
+            </div>
+    
+            <div class="description">
+                <label for="edit-description">Description</label>
+                <textarea name="description" id="edit-description" cols="80" rows="10"></textarea>
+            </div>
+    
+            <div class="date">
+                <label for="edit-date">Due date</label>
+                <input type="date" id="edit-date" name="due-date">
+            </div>
+    
+            <div class="project-priority">
+                <label>Priority</label>
+                <div>
+                    <button class="project-priority-button">Low</button>
+                    <button class="project-priority-button">Medium</button>
+                    <button class="project-priority-button">High</button>
+                </div>
+            </div>
+    
+            <div class="buttons">
+                <button type="submit" class="edit">Edit</button>
+                <button class="edit-cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
     
 </body>
 </html>

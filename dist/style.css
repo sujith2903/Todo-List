@@ -65,7 +65,6 @@ svg{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255, 174, 24,0.7);
     font-size: 5rem;
     border-bottom: 5px solid rgb(0, 0, 0);
 }
@@ -95,7 +94,7 @@ svg{
 }
 
 .priority::after{
-    content: ' Priority';
+    content: ' Priority)';
 }
 
 .project-due{
@@ -173,7 +172,8 @@ svg{
     font-size: 1.75rem;
 }
 
-.add-project{
+.add-project,
+.edit-project{
     display:none;
     justify-content: center;
     align-items: center;
@@ -185,8 +185,8 @@ svg{
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-
-.add-project-form{
+.add-project-form,
+.edit-project-form{
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -195,63 +195,75 @@ svg{
     gap:25px;
 }
 
-.add-project-form div{
+.add-project-form div,
+.edit-project-form div{
     display: flex;
     flex-direction: column;
     gap:10px;
 }
 
-.add-project-form .title{
+.add-project-form .title, 
+.edit-project-form .title{
     width:20rem;
 }
 
-.add-project-form .date{
+.add-project-form .date, 
+.edit-project-form .date{
     width: 10rem;
 }
 
-.add-project-form .project-priority div{
+.add-project-form .project-priority div,
+.edit-project-form .project-priority div{
     flex-direction: row;
     gap:30px;
 }
 
-.add-project-form .project-priority button, form .buttons button{
+.add-project-form .project-priority button, form .buttons button,
+.edit-project-form .project-priority button{
     padding: 5px 10px;
     border-radius: 5px;
     width:5rem;
 }
 
-.add-project-form .project-priority div button:nth-child(1){
+.add-project-form .project-priority div button:nth-child(1),
+.edit-project-form .project-priority div button:nth-child(1){
    background-color: #a3e635;
    border: 1px solid #15803d;
 }
 
-.add-project-form .project-priority div button:nth-child(2) {
+.add-project-form .project-priority div button:nth-child(2),
+.edit-project-form .project-priority div button:nth-child(2) {
     background-color: #fb923c;
     border:1px solid #9a3412;
 }
 
-.add-project-form .project-priority div button:nth-child(3) {
+.add-project-form .project-priority div button:nth-child(3),
+.edit-project-form .project-priority div button:nth-child(3){
     background-color: #dc2626;
     border: 1px solid #7f1d1d;
 }
 
-.add-project-form .project-priority div button:focus{
+.add-project-form .project-priority div button:focus,
+.edit-project-form .project-priority div button:focus{
     border: 3px solid black;
 }
 
-.add-project-form .buttons{
+.add-project-form .buttons,
+.edit-project-form .buttons{
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap:50px;
 }
 
-.add-project-form .buttons .add{
+.add-project-form .buttons .add,
+.edit-project-form .buttons .edit{
     background-color: #60a5fa;
     border: 1px solid #1e40af;
 }
 
-.add-project-form .buttons .cancel{
+.add-project-form .buttons .cancel,
+.edit-project-form .buttons .edit-cancel{
     background-color: #64748b;
     border: 1px solid #1e293b;
 }

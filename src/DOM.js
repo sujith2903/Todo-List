@@ -4,8 +4,10 @@ import addProjectList from './addProject'
 const dom = (function () {
     
     let index
-    let taskIndex
+    let taskIndex = 0
     let openProject
+    let targetProject 
+    let targetProjectTitle
     const projectsList = document.querySelector('.projects-lists')
     const mainContent = document.querySelector('.main-content')
     const dueContent = document.querySelector('.due-content')
@@ -42,6 +44,11 @@ const dom = (function () {
         editProjectButton.classList.add('edit-project-button')
         editProjectButton.innerHTML = '<svg class="editSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="editSVG" d="M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19H5V5H12V3H5M17.78,4C17.61,4 17.43,4.07 17.3,4.2L16.08,5.41L18.58,7.91L19.8,6.7C20.06,6.44 20.06,6 19.8,5.75L18.25,4.2C18.12,4.07 17.95,4 17.78,4M15.37,6.12L8,13.5V16H10.5L17.87,8.62L15.37,6.12Z" /></svg>'
         projectDiv.appendChild(editProjectButton)
+    }
+
+    const editProjectDiv = function () {
+
+        targetProjectTitle.textContent = openProject['title']
     }
 
     const deleteProject = function (index) {
@@ -200,11 +207,12 @@ const dom = (function () {
             (project.target.classList.contains('deleteSVG')) ||
             (project.target.classList.contains('editSVG'))) {
         
-            let targetProject = project.target.closest('.project-display')
+            targetProject = project.target.closest('.project-display')
             index = Array.from(targetProject.parentNode.children).indexOf(targetProject)
+            openProject = addProjectList.myProjectArray[index]
         }
     })
-
+     
     // Event handler when a project is deleted
     projectsList.addEventListener('click', (project) => {
         if (project.target.classList.contains('deleteSVG')) {
@@ -215,20 +223,28 @@ const dom = (function () {
         }
     })
 
+    // Event handler when a project edit button is clicked
+    projectsList.addEventListener('click', (project) => {
+
+        if (project.target.classList.contains('editSVG')) {
+
+            addProjectList.displayEditForm(index)
+
+            targetProjectTitle = targetProject.querySelector('.project')
+        }
+    })
+
     // Event handler when a project is clicked
     projectsList.addEventListener('click', (project) => {
         if (project.target.classList.contains('project')) {
             
             mainContent.style.display = 'flex'
             dueContent.style.display = 'none'
-            openProject = addProjectList.myProjectArray[index]
-
-            console.log(openProject)
 
             projectTitle.textContent = openProject['title']
             projectDescription.textContent  = openProject['description']
             projectDue.textContent  = openProject['date']
-            projectPriority.textContent = openProject['priority']
+            projectPriority.textContent = `(`+`${openProject['priority']}`
             
             clearTaskList()
             generateTaskList()
@@ -291,6 +307,7 @@ const dom = (function () {
          generateDueProjects('isThisWeek')       
     })
 
+    // Event handler for sorting by priority 
     priorityTab.addEventListener('click', (event) => {
         if (event.target.classList.contains('priority-low')) {
             generatePriorityProjects('low')
@@ -301,15 +318,11 @@ const dom = (function () {
         }
     })
 
-    /*
-    editProjectButton.addEventListener('click', () => {
-        addProjectList.addProject.style.display = 'flex'
-
-    })*/
-
     return {
         createProjectDiv,
-        deleteProject
+        editProjectDiv,
+        deleteProject,
+        index
     }
 
 })();
