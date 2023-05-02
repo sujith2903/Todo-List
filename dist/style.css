@@ -9,8 +9,6 @@ body{
     display: grid;
     grid-template-columns: 1.5fr 5fr;
     height: 100vh;
-    
-
 }
 
 .side-bar{
@@ -27,16 +25,22 @@ body{
 .due{
     display: flex;
     flex-direction: column;
+    gap:10px;
+    padding: 5px;
 }
 
 .priority-tab{
     display: flex;
     flex-direction: column;
+    gap:10px;
+    padding: 5px;
 }
 
 .projects{
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    padding: 5px;
 }
 
 .project-button{
