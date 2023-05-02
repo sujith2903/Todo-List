@@ -1,4 +1,5 @@
 import addProjectList from './addProject'
+import dom from './DOM'
 
 const storage = (function () {
 
@@ -12,6 +13,8 @@ const storage = (function () {
 
                 console.log(storageArray[i])
             }
+
+            dom.createProjectDiv()
         }
     }
 
