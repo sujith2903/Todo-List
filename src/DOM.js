@@ -1,9 +1,10 @@
 import { isThisWeek, isToday } from 'date-fns';
 import addProjectList from './addProject'
+import storage from './storage'
 
 const dom = (function () {
     
-    let index
+    let index = 0
     let taskIndex = 0
     let openProject
     let targetProject 
@@ -57,7 +58,7 @@ const dom = (function () {
             mainContent.style.display='none'
         }
 
-        addProjectList.myProjectArray.splice(index , 1)
+        addProjectList.myProjectArray.splice(index, 1)
     }
 
     const generateNewTask = function () {
@@ -219,7 +220,7 @@ const dom = (function () {
             const projectDiv = project.target.closest('.project-display')
             deleteProject(index)
             projectsList.removeChild(projectDiv)
-            
+            storage.storeData()            
         }
     })
 
@@ -277,12 +278,14 @@ const dom = (function () {
                 isCompleted = event.target.checked
                 const taskObject = generateTaskObject(taskName, isCompleted)
                 addProjectList.myProjectArray[index]['tasks'][taskIndex] = taskObject
+                storage.storeData()
 
             } else if (event.target.classList.contains('task-input')) {
 
                 taskName = event.target.value
                 const taskObject = generateTaskObject(taskName, isCompleted)
                 addProjectList.myProjectArray[index]['tasks'][taskIndex] = taskObject
+                storage.storeData()
             }
         })
     })
@@ -294,6 +297,7 @@ const dom = (function () {
             const currentTask = event.target.closest('.individual-task')
             addProjectList.myProjectArray[index]['tasks'].splice(taskIndex,1)
             allTasks.removeChild(currentTask)
+            storage.storeData()
         }
     }) 
 

@@ -1,4 +1,5 @@
 import dom from './DOM'
+import storage from './storage'
 
 const addProjectList = (function () {
 
@@ -31,6 +32,7 @@ const addProjectList = (function () {
                 event.preventDefault()
                 const newProject = createProject(title.value, description.value, date.value, priorityValue)
                 myProjectArray.push(newProject)
+                storage.storeData()
                 dom.createProjectDiv()
                 console.log(myProjectArray)
                 addProject.style.display = 'none'
@@ -64,6 +66,7 @@ const addProjectList = (function () {
 
         editProject.style.display = 'flex'
         console.log(index)
+        console.log(dom.index)
         openProject = myProjectArray[index]
 
         editTitle.value = openProject['title']
@@ -96,6 +99,7 @@ const addProjectList = (function () {
         openProject['date'] = editDate.value
 
         editProject.style.display = 'none'
+        storage.storeData()
         dom.editProjectDiv()
         form.reset()
     })
