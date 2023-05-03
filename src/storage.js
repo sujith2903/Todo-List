@@ -15,8 +15,7 @@ const storage = (function () {
             dom.createProjectDiv()
 
         } else if (!localStorage.getItem('project')) {
-            
-            console.log('test')
+        
             let defaultProjects = [{title: 'Gym',
                                     description: 'List of workouts',
                                     date: '',

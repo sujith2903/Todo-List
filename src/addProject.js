@@ -17,10 +17,13 @@ const addProjectList = (function () {
     const editDate = document.querySelector('#edit-date')
     const editButton = document.querySelector('.edit')
     const editCancelButton = document.querySelector('.edit-cancel')
+    const editPriority = document.querySelectorAll('.edit-project-priority-button')
 
     let openProject
     let myProjectArray = []
     let priorityValue = 'Low'
+    let editPriorityValue
+    let priorityBorder 
    
     const displayForm = function () {
         
@@ -57,7 +60,6 @@ const addProjectList = (function () {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
                 priorityValue = button.textContent
-                console.log(priorityValue)
             })
         })
     }
@@ -73,6 +75,16 @@ const addProjectList = (function () {
         editDescription.value = openProject['description']
         editDate.value = openProject['date']
 
+        for (let i = 0; i < 3; i++){
+            if (editPriority[i].textContent == openProject['priority']) {
+                
+                priorityBorder =  editPriority[i]
+                priorityBorder.style.border = '3px solid black'
+            } else {
+                editPriority[i].style.border = 'none'
+            }
+        }
+
         editCancelButton.addEventListener('click', (event) => {
             event.preventDefault();
             editProject.style.display = 'none'
@@ -83,6 +95,15 @@ const addProjectList = (function () {
             if (event.target == editProject) {
                 editProject.style.display = 'none'
             }
+        })
+
+        editPriority.forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                priorityBorder.style.border = 'none'
+                button.style.border = '3px solid black'
+                editPriorityValue = button.textContent
+            })
         })
 
     }
@@ -97,8 +118,10 @@ const addProjectList = (function () {
         openProject['title'] = editTitle.value
         openProject['description'] = editDescription.value 
         openProject['date'] = editDate.value
-
+        openProject['priority'] = editPriorityValue
+        
         editProject.style.display = 'none'
+        priorityBorder.style.border = 'none'
         storage.storeData()
         dom.editProjectDiv()
         form.reset()

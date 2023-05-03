@@ -258,6 +258,7 @@ const dom = (function () {
             
             clearTaskList()
             generateTaskList()
+            console.log(openProject)
         }
     })
 
