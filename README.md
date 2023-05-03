@@ -1,6 +1,8 @@
 <h1>Just do it</h1>
   <p>This project is a part of the Odin project Curriculum. This webiste lets users add a project with title, description, due date and priority. Users can also go to individual projects to add tasks required to complete a project<p>
 
+Live: [Just-do-it](https://sujith2903.github.io/Todo-List/)
+
 <h3>Tools Used:</h3>
   <li>VS Code</li>
   <li>Webpack</li>
